@@ -1,5 +1,6 @@
 #!/usr/bin/node
-Languagearray = ['C is fun','Python is cool', 'JavaScript is amazing'];
-for(let i = 0; i > Languagearray.length; i++) {
-    console.log(Languagearray[i]);
-}
+const Languagearray = ['C is fun', 'Python is cool', 'JavaScript is amazing'];
+
+Languagearray.forEach(function (element) {
+    console.log(element);
+});
