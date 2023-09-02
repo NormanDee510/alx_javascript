@@ -4,5 +4,5 @@ const myObject = {
   value: 12
 };
 console.log(myObject);
-myObject.value.replace(12,89);
+myObject.value.replace(12, 89);
 console.log(myObject);
