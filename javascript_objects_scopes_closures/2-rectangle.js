@@ -5,7 +5,8 @@ class Rectangle {
         // If w or h is not a positive integer, create an empty object
         return {};
       }
-     
+      this.width = w;
+      this.height = h;
     }
   }
   
