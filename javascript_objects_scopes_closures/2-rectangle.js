@@ -3,7 +3,7 @@ class Rectangle {
     constructor(w, h) {
         this.width = w;
         this.height = h; 
-        if (w <= 9 || h <= 9) {
+        if (w > 9 || h > 9) {
             return {}; 
           }     
     }
