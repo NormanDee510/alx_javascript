@@ -1,8 +1,10 @@
 const request = require('request');
-request.get('https://intranet.alxswe.com', function (error, response) {
+
+const url = process.argv[2];
+request.get(url , (error, response) => {
 if (error) {
     console.log(`Error: ${error.statusCode}`)
-}else{
+}else {
     console.log(`code: ${response.statusCode}`);
 }
 
