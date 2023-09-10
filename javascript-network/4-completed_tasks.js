@@ -19,7 +19,7 @@ request.get(apiUrl, (error, response, body) => {
           }
         }
       });     
-      const formattedOutput = `${ JSON.stringify(completedTaskCounts, null, 2).replace(/"/g, "'").replace(/\n\s*/g, '') }`;
+      const formattedOutput = `{$JSON.stringify(completedTaskCounts, null, 2).replace(/"/g, "'").replace(/\n\s*/g, '')}`;
       console.log(formattedOutput);
     } catch (parseError) {
       console.error(`Error parsing JSON: ${parseError.message}`);
