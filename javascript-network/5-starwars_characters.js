@@ -33,3 +33,4 @@ function fetchMovieCharacters(movieId) {
      }
     })
 }
+fetchMovieCharacters();
