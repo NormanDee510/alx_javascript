@@ -19,7 +19,7 @@ request.get(apiUrl, (error, response, body) => {
           }
         }
       });     
-      const formattedOutput = `${JSON.stringify(completedTaskCounts, null, 2)}`
+      const formattedOutput = `{${Object.keys(completedTaskCounts).map(key => `'${key}': ${completedTaskCounts[key]}`).join(', ')}}`
       .replace(/"/g, "'");
       console.log(formattedOutput);
     } catch (parseError) {
