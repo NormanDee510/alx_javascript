@@ -14,7 +14,7 @@ function fetchMovieCharacters(movieId) {
      }else {
         try{
         const movieData = JSON.parse(body);
-        const characters = moveiData.characters;
+        const characters = movieData.characters;
         characters.forEach((characterUrl) => {
             request.get(characterUrl, (charError, charResponse, charBody) => {
                 if (charError) {
