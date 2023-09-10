@@ -12,7 +12,7 @@ request.get(url, (error, response, body) => {
   } else {
     try {      
       fs.writeFileSync(filePath, body, 'utf-8');
-      console.log(`File saved to ${filePath}`);
+      //console.log(`File saved to ${filePath}`);
     } catch (writeError) {
       console.error(`Error writing to file: ${writeError.message}`);
     }
