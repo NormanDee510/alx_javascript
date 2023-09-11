@@ -23,7 +23,7 @@ function fetchMovieCharacters(movieId) {
                     console.error(`Error: Status Code ${charResponse.statusCode}`);
                   } else {
                     const characterData = JSON.parse(charBody);
-                    console.log(characterData.name);
+                    console.log("OK", characterData.name);
                   }   
             })
         })
