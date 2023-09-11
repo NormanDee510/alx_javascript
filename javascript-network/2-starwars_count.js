@@ -1,5 +1,5 @@
 const request = require('request');
-const apiUrl = process.argv[2];
+const apiUrl = 'swapi-api.alx-tools.com/api/films/';
 const characterId = 18;
 
 
