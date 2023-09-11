@@ -1,29 +1,24 @@
 const request = require('request');
-const apiUrl = process.argv[2];
+const url = process.argv[2];
 
-request.get(apiUrl, (error, response, body) => {
-  if (error) {   
-    console.error(`Error: ${error.message}`);
-  } else if (response.statusCode !== 200) {    
-    console.error(`Error: Status Code ${response.statusCode}`);
-  } else {
-    try {     
-      const tasksData = JSON.parse(body);      
-      const completedTaskCounts = {};     
-      tasksData.forEach((task) => {
-        if (task.completed) {
-          if (completedTaskCounts[task.userId]) {
-            completedTaskCounts[task.userId]++;
-          } else {
-            completedTaskCounts[task.userId] = 1;
-          }
+request(url, function (err, response, body) {
+  if (err) {
+    console.log(err);
+  } else if (response.statusCode === 200) {
+    const completed = {};
+    const tasks = JSON.parse(body);
+    for (const i in tasks) {
+      const task = tasks[i];
+      if (task.completed === true) {
+        if (completed[task.userId] === undefined) {
+          completed[task.userId] = 1;
+        } else {
+          completed[task.userId]++;
         }
-      });     
-      const formattedOutput = `{${Object.keys(completedTaskCounts).map(key => `'${key}': ${completedTaskCounts[key]}`).join(', ')}}`
-      .replace(/"/g, "'");
-      console.log(formattedOutput);
-    } catch (parseError) {
-      console.error(`Error parsing JSON: ${parseError.message}`);
+      }
     }
+    console.log(completed);
+  } else {
+    console.log('An error occured. Status code: ' + response.statusCode);
   }
 });
