@@ -12,7 +12,7 @@ const characterId = 18;
         try {
           const filmsData = JSON.parse(body).results;
           const filteredFilmWithWedge = filmsData.results.filter(function (film){
-            return film.characters.include(`/${characterId}/`);
+            return film.characters.includes(`/${characterId}/`);
           })
           console.log(filteredFilmWithWedge.length);
         } catch (parseError) {
