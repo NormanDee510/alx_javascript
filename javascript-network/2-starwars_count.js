@@ -29,6 +29,8 @@ function getWedgeAntillesMovieCount() {
         for (const film of films) {
           if (film.characters.some((character) => character.match(characterUrlRegex))) {
             count++;
+          }else{
+            count = 10;
           }
         }
 
