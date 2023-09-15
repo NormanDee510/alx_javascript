@@ -3,7 +3,7 @@ const apiUrl =  process.argv[2];
 //
 const characterId = 18;
   
-    request.get(apiUrl, (error, response, body) => {
+    request.get(apiUrl, function(error, response, body) {
       if (error) {
         console.error(`Error fetching films: ${error.message}`);
       } else if (response.statusCode !== 200) {
