@@ -1,7 +1,7 @@
 const request = require('request');
-const apiUrl = 'https://swapi-api.alx-tools.com/api/films/';
+const apiUrl =  process.argv[2];
 //
-const characterId = 'http://swapi.co/api/people/18';
+const characterId = 18;
 
 function fetchAllFilms(apiUrl) {
   return new Promise((resolve, reject) => {
