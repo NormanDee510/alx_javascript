@@ -1,5 +1,6 @@
 const request = require('request');
-const apiUrl = 'https://swapi-api.alx-tools.com/api/films/';
+const apiUrl = 'https://swapi.co/api/api/films/';
+//http://swapi.co/api/people/18/
 const characterId = 18;
 
 function fetchAllFilms(apiUrl) {
