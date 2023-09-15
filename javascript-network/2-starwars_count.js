@@ -49,7 +49,7 @@ async function countWedgeAntillesAppearances(apiUrl, characterId) {
     for (const film of films) {
       const characters = await Promise.all(film.characters.map(fetchCharacterData));
 
-      if (characters.some((character) => character.url.endsWith(`people/18/`))) {
+      if (characters.some((character) => character.url.endsWith(`people/${characterId}/`))) {
         count++;
       }
     }
