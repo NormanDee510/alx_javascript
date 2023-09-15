@@ -1,69 +1,45 @@
 const request = require('request');
-const apiUrl =  process.argv[2];
-//
+
+const apiURL = 'https://swapi-api.alx-tools.com/api/films/';
 const characterId = 18;
 
-function fetchAllFilms(apiUrl) {
-  return new Promise((resolve, reject) => {
-    request.get(apiUrl, (error, response, body) => {
-      if (error) {
-        reject(`Error fetching films: ${error.message}`);
-      } else if (response.statusCode !== 200) {
-        reject(`Error fetching films: Status Code ${response.statusCode}`);
-      } else {
-        try {
-          const filmsData = JSON.parse(body).results;
-          resolve(filmsData);
-        } catch (parseError) {
-          reject(`Error parsing films JSON: ${parseError.message}`);
-        }
-      }
-    });
-  });
-}
-
-async function fetchCharacterData(characterUrl) {
-  return new Promise((resolve, reject) => {
-    request.get(characterUrl, (error, response, body) => {
-      if (error) {
-        reject(`Error fetching character: ${error.message}`);
-      } else if (response.statusCode !== 200) {
-        reject(`Error fetching character: Status Code ${response.statusCode}`);
-      } else {
-        try {
-          const characterData = JSON.parse(body);
-          resolve(characterData);
-        } catch (parseError) {
-          reject(`Error parsing character JSON: ${parseError.message}`);
-        }
-      }
-    });
-  });
-}
-
-async function countWedgeAntillesAppearances(apiUrl, characterId) {
-  try {
-    const films = await fetchAllFilms(apiUrl);
-    let count = 0;
-
-    for (const film of films) {
-      const characters = await Promise.all(film.characters.map(fetchCharacterData));
-
-      if (characters.some((character) => character.url.endsWith(`people/${characterId}/`))) {
-        count++;
-      }
+function getWedgeAntillesMovieCount() {
+  request(apiURL, (error, response, body) => {
+    if (error) {
+      console.error('Error fetching data from the API:', error.message);
+      return;
     }
 
-    return count;
-  } catch (error) {
-    throw error; // Rethrow the error for centralized error handling
-  }
+    if (response.statusCode !== 200) {
+      console.error(`API returned status code ${response.statusCode}`);
+      return;
+    }
+
+    try {
+      const data = JSON.parse(body);
+
+      if (data && Array.isArray(data.results)) {
+        const films = data.results;
+        let count = 0;
+
+        // Define a regular expression to match the character URL ending with the character ID
+        const characterUrlRegex = new RegExp(`\\/people\\/${characterId}$`);
+
+        // Iterate through the films and check if Wedge Antilles is present
+        for (const film of films) {
+          if (film.characters.some((character) => character.match(characterUrlRegex))) {
+            count++;
+          }
+        }
+
+        console.log(`Number of movies with Wedge Antilles: ${count}`);
+      } else {
+        console.error('API response did not contain the expected data structure.');
+      }
+    } catch (parseError) {
+      console.error('Error parsing API response:', parseError.message);
+    }
+  });
 }
 
-countWedgeAntillesAppearances(apiUrl, characterId)
-  .then((count) => {
-    console.log(count);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+getWedgeAntillesMovieCount();
