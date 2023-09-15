@@ -13,7 +13,7 @@ function fetchAllFilms(apiUrl) {
         try {
           const filmsData = JSON.parse(body);
           const wedgeFilms = filmsData.results.filter((film)=>{
-            return film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${characterId}`) 
+            return film.characters.includes(`https://swapi-api.co/api/people/${characterId}`) 
           })
           resolve(wedgeFilms);
         } catch (parseError) {
