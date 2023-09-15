@@ -21,6 +21,25 @@ function fetchAllFilms(apiUrl) {
   });
 }
 
+async function fetchCharacterData(characterUrl) {
+  return new Promise((resolve, reject) => {
+    request.get(characterUrl, (error, response, body) => {
+      if (error) {
+        reject(`Error fetching character: ${error.message}`);
+      } else if (response.statusCode !== 200) {
+        reject(`Error fetching character: Status Code ${response.statusCode}`);
+      } else {
+        try {
+          const characterData = JSON.parse(body);
+          resolve(characterData);
+        } catch (parseError) {
+          reject(`Error parsing character JSON: ${parseError.message}`);
+        }
+      }
+    });
+  });
+}
+
 async function countWedgeAntillesAppearances(apiUrl, characterId) {
   try {
     const films = await fetchAllFilms(apiUrl);
