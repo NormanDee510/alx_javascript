@@ -15,7 +15,7 @@ function fetchAllFilms(apiUrl) {
           const wedgeFilms = filmsData.results.filter((film)=>{
             return film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${characterId}`) 
           })
-          resolve(filmsData);
+          resolve(wedgeFilms);
         } catch (parseError) {
           reject(`Error parsing films JSON: ${parseError.message}`);
         }
