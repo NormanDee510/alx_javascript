@@ -11,11 +11,8 @@ function fetchAllFilms(apiUrl) {
         reject(`Error fetching films: Status Code ${response.statusCode}`);
       } else {
         try {
-          const filmsData = JSON.parse(body);
-          const wedgeFilms = filmsData.results.filter((film)=>{
-            return film.characters.includes(`https://swapi-api.co/api/people/${characterId}`) 
-          })
-          resolve(wedgeFilms);
+          const filmsData = JSON.parse(body).results;
+          resolve(filmsData);
         } catch (parseError) {
           reject(`Error parsing films JSON: ${parseError.message}`);
         }
