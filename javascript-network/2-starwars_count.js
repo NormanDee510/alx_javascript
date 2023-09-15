@@ -11,7 +11,10 @@ function fetchAllFilms(apiUrl) {
         reject(`Error fetching films: Status Code ${response.statusCode}`);
       } else {
         try {
-          const filmsData = JSON.parse(body).results;
+          const filmsData = JSON.parse(body);
+          const wedgeFilms = filmsData.results.filter((film)=>{
+            return film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${characterId}`) 
+          })
           resolve(filmsData);
         } catch (parseError) {
           reject(`Error parsing films JSON: ${parseError.message}`);
@@ -55,7 +58,7 @@ async function countWedgeAntillesAppearances(apiUrl, characterId) {
 
     return count;
   } catch (error) {
-    throw error; // Rethrow the error for centralized error handling
+    throw error; 
   }
 }
 
