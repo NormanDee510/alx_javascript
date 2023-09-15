@@ -50,6 +50,8 @@ async function countWedgeAntillesAppearances(apiUrl, characterId) {
 
       if (characters.some((character) => character.url.endsWith(`people/${characterId}/`))) {
         count++;
+      }else{
+        count = 0;
       }
     }
 
