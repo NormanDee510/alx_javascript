@@ -32,7 +32,7 @@ function getWedgeAntillesMovieCount() {
           }
         }
 
-        console.log(`Number of movies with Wedge Antilles: ${count}`);
+        console.log(`${count}`);
       } else {
         console.error('API response did not contain the expected data structure.');
       }
