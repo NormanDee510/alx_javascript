@@ -1,7 +1,7 @@
 const request = require('request');
-const apiUrl = 'https://swapi.co/api/api/films/';
-//http://swapi.co/api/people/18/
-const characterId = 18;
+const apiUrl = 'https://swapi-api.alx-tools.com/api/films/';
+//
+const characterId = 'http://swapi.co/api/people/18';
 
 function fetchAllFilms(apiUrl) {
   return new Promise((resolve, reject) => {
@@ -49,7 +49,7 @@ async function countWedgeAntillesAppearances(apiUrl, characterId) {
     for (const film of films) {
       const characters = await Promise.all(film.characters.map(fetchCharacterData));
 
-      if (characters.some((character) => character.url.endsWith(`people/${characterId}/`))) {
+      if (characters.some((character) => character.url.endsWith(`people/18/`))) {
         count++;
       }
     }
