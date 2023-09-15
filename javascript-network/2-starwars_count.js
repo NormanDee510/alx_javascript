@@ -53,7 +53,7 @@ async function countWedgeAntillesAppearances(apiUrl, characterId) {
       }
     }
 
-    //return count;
+    return count;
   } catch (error) {
     throw error; // Rethrow the error for centralized error handling
   }
