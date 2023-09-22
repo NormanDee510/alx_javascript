@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Add CSS styling */
+        h1 {
+            text-align: left;
+            margin: 0;
+        }
+        #loginForm {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        input[type="text"] {
+            margin: 5px;
+        }
+        #logInButton {
+            margin-left: 10px;
+        }
+        #cookiesContainer {
+            text-align: left;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 2em;
+        }
+        #showCookiesButton {
+            text-align: left;
+            margin: 0;
+            display: block;
+            margin-top: 10px;
+        }
+        /* Add CSS styling for the login form */
+        #loginFormDiv {
+            display: none;
+            margin-top: 20px;
+        }
+        #loginFormDiv h2 {
+            text-align: left;
+        }
+        #loginFormDiv button {
+            margin-left: 10px;
+        }
+        #welcomeMessage {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login to the website</h1>
+    <div id="loginFormDiv">
+        <h2>Login Form</h2>
+        <form id="loginForm">
+            <input type="text" id="firstname" placeholder="First Name">
+            <input type="text" id="email" placeholder="Email">
+            <button id="logInButton">Log me in</button>
+        </form>
+    </div>
+    <div id="welcomeMessage"></div>
+    <div id="cookiesContainer">Cookies:</div>
+    <button id="showCookiesButton">Show the cookies</button>
+
+    <script>
+        function setCookies() {
+            const firstname = document.getElementById('firstname').value;
+            const email = document.getElementById('email').value;
+            
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 10);
+            
+            const expires = expirationDate.toUTCString();
+            
+            document.cookie = `firstname=${firstname}; expires=${expires}`;
+            document.cookie = `email=${email}; expires=${expires}`;
+        }
+        
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (let i = 0; i < cookies.length; i++) {
+                const [cookieName, cookieValue] = cookies[i].split('=');
+                if (cookieName === name) {
+                    return cookieValue;
+                }
+            }
+            return ''; // Cookie not found
+        }
+
+        function showCookies() {
+            const email = getCookie('email');
+            const firstname = getCookie('firstname');
+            const cookiesContainer = document.getElementById('cookiesContainer');
+            cookiesContainer.textContent = `Email: ${email} - Firstname: ${firstname}`;
+        }
+
+        function showForm() {
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            welcomeMessage.style.display = 'none';
+
+            const loginFormDiv = document.getElementById('loginFormDiv');
+            loginFormDiv.style.display = 'block';
+        }
+
+        function hideForm() {
+            const loginFormDiv = document.getElementById('loginFormDiv');
+            loginFormDiv.style.display = 'none';
+        }
+
+        function deleteCookiesAndShowForm() {
+            document.cookie = 'firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+            document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+            showForm();
+        }
+
+        function showWelcomeMessageOrForm() {
+            const firstname = getCookie('firstname');
+            if (firstname) {
+                const welcomeMessage = document.getElementById('welcomeMessage');
+                welcomeMessage.style.display = 'block';
+                welcomeMessage.innerHTML = `Welcome ${firstname} <a href="#" id="logoutLink">(logout)</a>`;
+                
+                const logoutLink = document.getElementById('logoutLink');
+                logoutLink.style.fontStyle = 'italic';
+                logoutLink.style.marginLeft = '10px';
+                logoutLink.style.fontSize = '10px';
+
+                logoutLink.addEventListener('click', function() {
+                    deleteCookiesAndShowForm();
+                    welcomeMessage.style.display = 'none';
+                });
+            } else {
+                showForm();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const logInButton = document.getElementById('logInButton');
+            const showCookiesButton = document.getElementById('showCookiesButton');
+            
+            logInButton.addEventListener('click', setCookies);
+            showCookiesButton.addEventListener('click', showCookies);
+            
+            showWelcomeMessageOrForm();
+        });
+    </script>
+</body>
+</html>
+

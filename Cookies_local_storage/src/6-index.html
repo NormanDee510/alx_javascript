@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const availableItems = ['Shampoo', 'Soap', 'Sponge', 'Water'];
+            
+            // Check if session storage is available
+            if (typeof(Storage) === 'undefined' || typeof(sessionStorage) === 'undefined') {
+                alert('Sorry, your browser does not support session storage. Try again with a better one.');
+            } else {
+                // Display the shopping cart and available items
+                createStore(availableItems);
+                displayCart();
+            }
+
+            function addItemToCart(item) {
+                // Add an item to the cart by setting a session storage key
+                sessionStorage.setItem(item, 'true');
+                displayCart();
+            }
+
+            function createStore(items) {
+                // Create and append a list of available items
+                const ul = document.createElement('ul');
+                document.body.appendChild(ul);
+
+                items.forEach((item) => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    li.addEventListener('click', () => addItemToCart(item));
+                    ul.appendChild(li);
+                });
+            }
+
+            function displayCart() {
+                const cartItems = Object.keys(sessionStorage);
+                
+                if (cartItems.length === 0) {
+                    // If the cart is empty, do nothing
+                    return;
+                }
+
+                const message = `You previously had ${cartItems.length} item${cartItems.length > 1 ? 's' : ''} in your cart`;
+                
+                // Display the message in a paragraph
+                const p = document.createElement('p');
+                p.textContent = message;
+                
+                // Remove any existing message
+                const existingMessage = document.querySelector('p');
+                if (existingMessage) {
+                    existingMessage.remove();
+                }
+
+                // Append the message to the body
+                document.body.appendChild(p);
+            }
+        });
+    </script>
+</body>
+</html>

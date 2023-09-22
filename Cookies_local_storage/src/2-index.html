@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Add CSS styling */
+        h1 {
+            text-align: left; /* Align text to the left */
+            margin: 0; /* Remove any default margins */
+        }
+        #loginForm {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        input[type="text"] {
+            margin: 5px;
+        }
+        #logInButton {
+            margin-left: 10px; /* Add margin to separate the button */
+        }
+        #cookiesContainer {
+            text-align: left; /* Align text to the left */
+            margin-top: 20px;
+            font-weight: bold; /* Make the text bold */
+            font-size: 2em;
+        }
+        #showCookiesButton {
+            text-align: left; /* Align text to the left */
+            margin: 0; /* Remove any default margins */
+            display: block;
+            margin-top: 10px; /* Add margin to separate the button */
+        }
+    </style>
+</head>
+<body>
+    <h1>Login to the website</h1>
+    <form id="loginForm">
+        <input type="text" id="firstname" placeholder="First Name">
+        <input type="text" id="email" placeholder="Email">
+        <button id="logInButton">Log me in</button>
+    </form>
+    <div id="cookiesContainer">Cookies:</div> <!-- Make Cookies text bold -->
+    <button id="showCookiesButton">Show the cookies</button> <!-- Change to a button -->
+    <script>
+        function setCookies() {
+            const firstname = document.getElementById('firstname').value;
+            const email = document.getElementById('email').value;
+            
+            // Calculate the expiration date for the cookies (10 days from now)
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 10);
+            
+            // Format the expiration date as required by cookies (UTC format)
+            const expires = expirationDate.toUTCString();
+            
+            // Set the cookies with the expiration date
+            document.cookie = `firstname=${firstname}; expires=${expires}`;
+            document.cookie = `email=${email}; expires=${expires}`;
+        }
+        
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (let i = 0; i < cookies.length; i++) {
+                const [cookieName, cookieValue] = cookies[i].split('=');
+                if (cookieName === name) {
+                    return cookieValue;
+                }
+            }
+            return ''; // Cookie not found
+        }
+
+        function showCookies() {
+            const email = getCookie('email');
+            const firstname = getCookie('firstname');
+            const cookiesContainer = document.getElementById('cookiesContainer');
+            cookiesContainer.textContent = `Email: ${email} - Firstname: ${firstname}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const logInButton = document.getElementById('logInButton');
+            const showCookiesButton = document.getElementById('showCookiesButton');
+            
+            logInButton.addEventListener('click', setCookies);
+            showCookiesButton.addEventListener('click', showCookies);
+        });
+    </script>
+</body>
+</html>
