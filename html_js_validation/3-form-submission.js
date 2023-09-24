@@ -21,7 +21,7 @@ function handleFormSubmit(event) {
     } else {
         // Form submission successful
         successElement.textContent = "Form submitted successfully!";
-        // You can send the form data to a server here if needed
+        
     }
 }
 

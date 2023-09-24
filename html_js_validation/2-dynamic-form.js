@@ -11,7 +11,6 @@ function generateInputFields(numFields) {
         inputContainer.appendChild(inputField);
     }
 }
-
 // Function to validate the form before submission
 function validateForm() {
     const numFieldsSelect = document.getElementById("numFields");
@@ -35,7 +34,6 @@ function validateForm() {
     errorElement.textContent = "";
     return true;
 }
-
 // Add an event listener to the form to call validateForm on submit
 document.getElementById("dynamicForm").addEventListener("submit", function (event) {
     if (!validateForm()) {
