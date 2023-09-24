@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="1-email-validation.js"></script>
+    <script src="3-form-submission.js"></script>
 </head>
 <body>
-    <form id="emailForm">
+    <form id="submitForm">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
   <label for="email">Email:</label>
-  <input type="text" id="email" name="email">
+  <input type="email" id="email" name="email" required>
+  <!-- Add more form fields as needed -->
   <button type="submit">Submit</button>
-  <p id="error" style="color: red;"></p>
 </form>
 </body>
 </html>
