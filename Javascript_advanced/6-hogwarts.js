@@ -37,3 +37,4 @@ const studentHogwarts = (function () {
   draco.penalizeStudent(); 
   console.log(draco.getScore()); 
   
+  
