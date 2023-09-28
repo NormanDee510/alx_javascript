@@ -21,8 +21,9 @@ function validateForm() {
     // Generate dynamic input fields based on the selected value
     generateInputFields(selectedValue);
 
-    // Check if any dynamically generated fields are empty
+    // Check if all dynamically generated fields are filled
     const inputFields = inputContainer.querySelectorAll("input");
+
     for (const inputField of inputFields) {
         if (inputField.value.trim() === "") {
             errorElement.textContent = "Please fill in all fields.";
@@ -30,7 +31,7 @@ function validateForm() {
         }
     }
 
-    // Clear any previous error messages and allow form submission
+    // Clear the error message if all fields are filled
     errorElement.textContent = "";
     return true;
 }

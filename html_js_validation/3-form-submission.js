@@ -1,5 +1,5 @@
-// Function to handle form submission and perform validation
-function handleFormSubmit(event) {
+  // Function to handle form submission and perform validation
+  function handleFormSubmit(event) {
     event.preventDefault(); // Prevent default form submission
 
     const nameField = document.getElementById("name");
@@ -22,8 +22,14 @@ function handleFormSubmit(event) {
         // Form submission successful
         successElement.textContent = "Form submitted successfully!";
         
+        // Clear input field values
+        nameField.value = "";
+        emailField.value = "";
     }
 }
 
-// Add an event listener to the form to handle form submission
-document.getElementById("submitForm").addEventListener("submit", handleFormSubmit);
+// Add an event listener to ensure the DOM is fully loaded before executing the code
+document.addEventListener("DOMContentLoaded", function () {
+    // Add an event listener to the form to handle form submission
+    document.getElementById("submitForm").addEventListener("submit", handleFormSubmit);
+});
